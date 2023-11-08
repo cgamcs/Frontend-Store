@@ -1,10 +1,8 @@
 :root {
     --primario: #7209B7;
     --primarioOscuro: #822fca;
-    --resaltado: #F72585;
     --secundario: #FFD60A;
     --secundarioOscuro: #FFC300;
-    --gris: #E1E1E1;
     --blanco: #fff;
     --negro: #000;
 
@@ -93,7 +91,7 @@ h1 { font-size: 2.4rem; }
 }
 
 .navegacion__enlace--activo {
-    color: var(--secundarioOscuro);
+    color: var(--secundario);
 }
 
 /** Grid **/
