@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrontEnd Store</title>
+    <!-- Prefetch -->
+    <link rel="Prefetch" href="nosotros.html" as="document">
+    <!-- Preload -->
+    <link rel="preload" href="css/normalize.css" as="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" crossorigin="crossorigin" as="font">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="css/style.css" as="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <nav class="navegacion">
+                    <a href="index.html" class="navegacion__enlace">Tienda</a>
+                    <a href="nosotros.html" class="navegacion__enlace navegacion__enlace--activo">Nosotros</a>
+                </nav>
+
+                <div class="header__redes">
+                    <a class="header-icono" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
+                            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M16.5 7.5l0 .01" />
+                          </svg>
+                    </a>
+                    <a class="header-icono" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                            <path d="M3 7l9 6l9 -6" />
+                          </svg>
+                    </a>
+                </div>
+            </div>
+    </header><!-- .header -->
+
+    <main class="contenedor">
+        <h1>Nosotros</h1>
+
+        <div class="nosotros">
+            <p class="nosotros__contenido">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam turpis quam, pharetra eget facilisis tristique, vestibulum ultricies leo. Donec fringilla finibus erat non vehicula. Fusce sit amet eros ac neque tristique bibendum. Integer luctus eget felis eu auctor. Duis finibus tempus tincidunt. Pellentesque consectetur ipsum ac semper sagittis. Sed dictum eros at lectus tempus, ac tempus ipsum egestas. Vivamus vel dolor a dui imperdiet fermentum nec vitae tellus. Aliquam sodales maximus tellus, sit amet fermentum diam congue sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur sagittis tempor quam. Curabitur porttitor posuere ex id faucibus. Quisque iaculis est non diam lacinia, sit amet maximus enim malesuada. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec eget dapibus ligula.
+            </p>
+
+            <img class="nosotros__img" src="img/nosotros.jpg" alt="Imagen de nosotros">
+        </div>
+    </main>
+
+    <section class="contenedor comprar">
+        <h2 class="comprar__titulo">¿Porqué comprar con nosotros?</h2>
+
+        <div class="bloques">
+            <div class="bloque">
+                <img class="bloque__img" src="img/icono_1.png" alt="Porque comprar">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+
+            <div class="bloque">
+                <img class="bloque__img" src="img/icono_2.png" alt="Para Devs">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+
+            <div class="bloque">
+                <img class="bloque__img" src="img/icono_3.png" alt="Envío Gratis">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+
+            <div class="bloque">
+                <img class="bloque__img" src="img/icono_4.png" alt="La Mejor Calidad">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer__texto">Creado y diseñado por César García. <br> Todos los derechos reservados. ©</p>
+    </footer>
+</body>
+</html>
