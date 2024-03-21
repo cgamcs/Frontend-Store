@@ -6,6 +6,9 @@
 
 <img src="img/website.png">
 
+<h2>✏️ Things I learned</h2>
+<p> I learned how to use the grid attribute in addition to visualizing and understanding it in the element inspector, in addition to the fact that depending on the conditions it is necessary or easier to use flexbox and also write responsively with patterns using grid and flexbox. I understood the importance of BEM (block element modifier) that helps us to create reusable and ordered code in CSS projects, in addition to its rules that can basically be divided into 3: blocks, elements and modifiers.</p>
+
 <h2>🎨 Color code</h2>
 
 | Color       | Hex                                                                |
