@@ -273,3 +273,8 @@ h1 { font-size: 2.4rem; }
     text-align: center;
     color: var(--blanco);
 }
+
+/* Readme */
+.readme {
+    justify-content: center;
+}

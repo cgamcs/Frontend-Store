@@ -1,13 +1,8 @@
-<div>
+<div class="readme">
     🏪
     <br>
     <h1>frontend-sotre - cgamcs</h1>
-</div>
-
-<div>
-
- At first glance <a href="https://frontend-store-cgamcs.netlify.app/">frontend store</a> is a static page that helped me practice CSS
-
+    <p>At first glance <a href="https://frontend-store-cgamcs.netlify.app/">frontend store</a> is a static page that helped me practice CSS</p>
 </div>
 
 <div>
