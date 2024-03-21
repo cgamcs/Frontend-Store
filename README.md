@@ -8,9 +8,9 @@
 
 <h2>🎨 Color code</h2>
 
-| Color       | Hex                                   |
-| ------------|---------------------------------------|
-| Purple      |  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYV2Ms4tz+n4EIwDiqEF8oUT94ABazFfUlEYjBAAAAAElFTkSuQmCC"> `#7209b7`  |
+| Color       | Hex                                                                 |
+| ------------|---------------------------------------------------------------------|
+| Purple      |  ![#7209b7](https://via.placeholder.com/10/7209b7?text=+) `#7209b7` |
 | Purple Dark | `#822fca`                             |
 | Yellow      |  `#ffd60a`                            |
 | Yellow Dark | `#ffc300`                             |
