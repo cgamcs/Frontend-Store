@@ -7,7 +7,7 @@
 
 | Color    | Hex       |
 | ---      | ---       |
-| Purple |  <img src="img/Screenshot 2024-03-21 at 15-38-01 #7209b7 - Buscar con Google.png">`#7209b7`  |
+| Purple |  <img src="img/7209b7.png">`#7209b7`  |
 | Purple Dark     | `#822fca` |
 | Yellow |  `#ffd60a`  |
 | Yellow Dark     | `#ffc300` |
