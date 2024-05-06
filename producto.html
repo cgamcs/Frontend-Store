@@ -9,8 +9,9 @@
     <!-- Preload -->
     <link rel="preload" href="css/normalize.css" as="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" crossorigin="crossorigin" as="font">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="preload" href="css/style.css" as="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/heart.png">
@@ -54,13 +55,13 @@
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos quia fugiat dolor accusamus suscipit tenetur excepturi similique delectus nulla odio hic reiciendis non quasi consequuntur, maiores velit, ducimus ab labore? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit voluptatibus perspiciatis soluta eos neque vel, similique enim odit itaque quia eius quisquam, ea corrupti reiciendis ipsa ipsum voluptate in doloribus! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur quam beatae, quo porro nam ea magnam quae assumenda ipsa officia cum rerum iste fuga sunt et voluptas, dignissimos itaque voluptates.</p>
                 
                 <form class="formulario">
-                    <select class="formulario__campo">
+                    <select id="talla" class="formulario__campo">
                         <option disabled selected>--Selecciona Talla-</option>
                         <option >Chica</option>
                         <option >Mediana</option>
                         <option >Grande</option>
                     </select>
-                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    <input id="cantidad" class="formulario__campo" type="number" placeholder="Cantidad" min="1">
                     <input class="formulario__boton" type="submit" value="Agregar al carrito">
                 </form>
             </div>
@@ -70,5 +71,7 @@
     <footer class="footer">
         <p class="footer__texto">Creado y diseñado por César García. <br> Todos los derechos reservados. ©</p>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

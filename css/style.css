@@ -8,6 +8,7 @@
 
     --funeteHeading: 'PT Sans', sans-serif;
     --funeteParrafo: 'Open Sans', sans-serif;
+
 }
 
 html {
@@ -23,6 +24,9 @@ html {
 body {
     background-color: var(--primario);
     font-family: var(--funeteParrafo);
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
     font-size: 1.6rem;
     line-height: 1.5;
 }
@@ -261,6 +265,26 @@ h1 { font-size: 2.4rem; }
 .formulario__boton:hover {
     cursor: pointer;
     background-color: var(--secundarioOscuro);
+}
+
+.error {
+    background-color: rgb(182, 0, 0);
+    text-align: center;
+    padding: 1rem;
+    color: var(--blanco);
+    text-transform: uppercase;
+    grid-column: 1 / 3;
+    border-radius: 0.3rem;
+}
+
+.correcto {
+    background-color: rgb(74, 185, 0);
+    text-align: center;
+    padding: 1rem;
+    color: var(--blanco);
+    text-transform: uppercase;
+    grid-column: 1 / 3;
+    border-radius: 0.3rem;
 }
 
 /** FOOTER **/
