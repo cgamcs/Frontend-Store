@@ -40,28 +40,6 @@ function mostrarAlerta(mensaje, error = null) {
     }, 3000);
 }
 
-// function mostrarError(mensaje) {
-//     const error = document.createElement('P');
-//     error.textContent = mensaje;
-//     error.classList.add('error');
-//     formulario.appendChild( error );
-
-//     setTimeout(() => {
-//         error.remove()
-//     }, 3000);
-// }
-
-// function agregarCarrito(mensaje) {
-//     const correcto = document.createElement('P');
-//     correcto.textContent = mensaje;
-//     correcto.classList.add('correcto');
-//     formulario.appendChild( correcto );
-
-//     setTimeout(() => {
-//         correcto.remove();
-//     }, 3000);
-// }
-
 function leerCompra(evento) {
     datos[evento.target.id] = evento.target.value;
     console.log(datos);
