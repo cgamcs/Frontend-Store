@@ -19,7 +19,7 @@ Aprendí a utilizar el atributo Grid, además de visualizarlo y comprenderlo en 
 | Color           | Hex                                                                |
 | ----------------|--------------------------------------------------------------------|
 | Morado          | ![#7209b7](https://via.placeholder.com/10/7209b7?text=+) `#7209b7` |
-| Morado Oecuro   | ![#822fca](https://via.placeholder.com/10/822fca?text=+) `#822fca` |
+| Morado Oscuro   | ![#822fca](https://via.placeholder.com/10/822fca?text=+) `#822fca` |
 | Amarillo        | ![#ffd60a](https://via.placeholder.com/10/ffd60a?text=+) `#ffd60a` |
 | Amarillo Oscuro | ![#ffc300](https://via.placeholder.com/10/ffc300?text=+) `#ffc300` |
 | Blanco          | ![#ffffff](https://via.placeholder.com/10/ffffff?text=+) `#ffffff` |
