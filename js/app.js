@@ -1,68 +1,38 @@
-// const datos = {
-//     talla : '',
-//     cantidad : ''
-// }
-
-// const talla = document.querySelector('#talla');
-// const cantidad = document.querySelector('#cantidad');
-// const formulario = document.querySelector('.formulario');
-
+// Variables
+const paginaActual = window.location.pathname;
+const paginasBloqueada = ['/index.html', '/nosotros.html']
 const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const vaciarCarrito = document.querySelector('#vaciar-carrito');
 const listaCursos = document.querySelector('#producto');
 let articulosCarrito = [];
 
-// talla.addEventListener('input', leerCompra);
-// cantidad.addEventListener('input', leerCompra);
+// EventListeners
+cargarEvenetListeners();
+localStorage.getItem(carrito);
+function cargarEvenetListeners() {
+    // Muestra los cursos desde Local Storage
+    document.addEventListener('DOMContentLoaded', () => {
+        articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
 
-// formulario.addEventListener('submit', function(evento) {
-//     evento.preventDefault();
+        carritoHTML();
+    })
 
-//     const { talla, cantidad } = datos;
+    // Cuando agregar un curso al carrito presionando "Agregar al carrito"
+    if(!paginasBloqueada.includes(paginaActual)) {
+        listaCursos.addEventListener('click', agregarCurso);
+    }
 
-//     if(talla === '' || cantidad === '') {
-//         mostrarAlerta('Todos los campos son necesarios', 'error');
+    // Elimina cursos del carrito
+    carrito.addEventListener('click', eliminarCurso);
 
-//         return;
-//     }
+    // Vaciar el carrito
+    vaciarCarrito.addEventListener('click', () => {
+        articulosCarrito = []; // Reseteamos el arreglo
 
-//     mostrarAlerta('Se agrego correctamente al carrito');
-// })
-
-// Cuando agregar un curso al carrito presionando "Agregar al carrito"
-listaCursos.addEventListener('click', agregarCurso);
-
-// Elimina cursos del carrito
-carrito.addEventListener('click', eliminarCurso);
-
-// Vaciar el carrito
-vaciarCarrito.addEventListener('click', () => {
-    articulosCarrito = []; // Reseteamos el arreglo
-
-    limpiarHTML(); // Eliminamos todo el HTML
-})
-
-// function mostrarAlerta(mensaje, error = null) {
-//     const alerta = document.createElement('P');
-//     alerta.textContent = mensaje;
-
-//     if(error) {
-//         alerta.classList.add('error');
-//     } else {
-//         alerta.classList.add('correcto');
-//     }
-//     formulario.appendChild( alerta );
-
-//     setTimeout(() => {
-//         alerta.remove()
-//     }, 3000);
-// }
-
-// function leerCompra(evento) {
-//     datos[evento.target.id] = evento.target.value;
-//     console.log(datos);
-// }
+        limpiarHTML(); // Eliminamos todo el HTML
+    })
+}
 
 // Funciones
 function agregarCurso(e) {
@@ -71,7 +41,25 @@ function agregarCurso(e) {
     if (e.target.classList.contains('formulario__boton')) {
         const cursoSeleccionado = e.target.parentElement.parentElement.parentElement.parentElement;
 
-        leerDatosCurso(cursoSeleccionado);
+        // Obtener los elementos de talla y cantidad
+        const tallaSelecionada = cursoSeleccionado.querySelector('#talla');
+        const cantidadInput = cursoSeleccionado.querySelector('#cantidad').value;
+
+        console.log(tallaSelecionada.value)
+
+        // Validar que se haya seleccionado una talla
+        if (tallaSelecionada.value === '--Selecciona Talla-') {
+            mostararError('Debe seleccionar una talla');
+            return;
+        }
+
+        // Validar que la cantidad sea mayor a 0
+        if (cantidadInput.value <= 0) {
+            mostararError('Debe ingresar una cantidad válida');
+            return;
+        }
+
+        leerDatosCurso(cursoSeleccionado, tallaSelecionada.value, cantidadInput);
     }
 }
 
@@ -90,13 +78,14 @@ function eliminarCurso(e) {
 }
 
 // Lee el contenido del HTML al que le dimos click y extrae la informacion del curso
-function leerDatosCurso(curso) {
+function leerDatosCurso(curso, talla, cantidad) {
     // Crear un objeto con el contenido del curso actual
     const infoCurso = {
         imagen: curso.querySelector('img').src,
         titulo: curso.querySelector('h1').textContent,
         id: curso.querySelector('input[type="submit"]').getAttribute('data-id'),
-        cantidad: 1
+        cantidad: cantidad,
+        talla: talla
     }
 
 
@@ -106,11 +95,12 @@ function leerDatosCurso(curso) {
         // Actualizamos la cantidad
         const cursos = articulosCarrito.map( curso => {
             if( curso.id === infoCurso.id ) {
-                curso.cantidad++;
+                curso.cantidad = cantidad;
+                curso.talla = talla;
                 return curso; // Retorna el objeto actualizado
             } else {
                 return curso; // Retorna los objetos que no son duplicados
-            }
+            }            
         });
         articulosCarrito = [...cursos];
     } else {
@@ -145,7 +135,29 @@ function carritoHTML() {
 
         // Agrega el HTML del carrito en el tbody
         contenedorCarrito.appendChild(row);
-    })
+    });
+
+    // Agregar el carrito de compras al storage
+    sincronizarStorage();
+}
+
+function sincronizarStorage() {
+    localStorage.setItem('carrito', JSON.stringify(articulosCarrito));
+}
+
+function mostararError(error) {
+    const mensajeError = document.createElement('P');
+    mensajeError.textContent = error;
+    mensajeError.classList.add('error');
+
+    // Insertar en el HTML
+    const contenido = document.querySelector('.formulario');
+    contenido.appendChild(mensajeError);
+
+    // Elimana la alerta despues de 3s
+    setTimeout(() => {
+        mensajeError.remove();
+    }, 3000);
 }
 
 // Elimina los cursos del tbody
