@@ -77,6 +77,9 @@ function eliminarCurso(e) {
         articulosCarrito = articulosCarrito.filter( curso => curso.id !== cursoId );
 
         carritoHTML(); // Iterar sobre el carrito y mostrar su HTML
+
+        // Aactualizar el carrito de compras al storage
+        sincronizarStorage();
     }
 }
 
