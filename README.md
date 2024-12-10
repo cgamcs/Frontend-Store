@@ -2,7 +2,7 @@
 <img src="https://img.icons8.com/emoji/48/shopping-cart-emoji.png" alt="shopping-cart-emoji">
 </p>
 <h1 align="center">Frontend-Store</h1>
-<p align="center">A primera vista, <a href="https://frontend-store-cgamcs.netlify.app/" target="_blank">frontend store</a> es una página estática que me ayudó a practicar CSS</p>
+<p align="center">A primera vista, <a href="https://frontends-store.vercel.app/" target="_blank">frontend store</a> es una página estática que me ayudó a practicar CSS</p>
 
 <img src="img/website.png">
 
