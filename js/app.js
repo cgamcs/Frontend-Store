@@ -60,6 +60,9 @@ function agregarCurso(e) {
         }
 
         leerDatosCurso(cursoSeleccionado, tallaSelecionada.value, cantidadInput);
+
+        // Mostrar el carrito al agregar un proucto
+        mostrarCarrito();
     }
 }
 
@@ -143,6 +146,15 @@ function carritoHTML() {
 
 function sincronizarStorage() {
     localStorage.setItem('carrito', JSON.stringify(articulosCarrito));
+}
+
+function mostrarCarrito() {
+    const carritoPadre = carrito.parentElement;
+    carritoPadre.classList.add('hover');
+
+    setTimeout(() => {
+        carritoPadre.classList.remove('hover');
+    }, 3000);
 }
 
 function mostararError(error) {
