@@ -132,9 +132,9 @@ function mostrarProducto() {
                 <form class="formulario">
                     <select id="talla" class="formulario__campo" required>
                         <option value="" disabled selected>--Selecciona Talla--</option>
-                        <option value="chica">Chica</option>
-                        <option value="mediana">Mediana</option>
-                        <option value="grande">Grande</option>
+                        <option value="S">Chica</option>
+                        <option value="M">Mediana</option>
+                        <option value="L">Grande</option>
                     </select>
                     <input id="cantidad" class="formulario__campo" type="number" 
                            placeholder="Cantidad" min="1" max="10" required>
@@ -253,14 +253,25 @@ function carritoHTML() {
 
     // Recorre el carrito y genera el HTML
     articulosCarrito.forEach( curso => {
-        const { imagen, titulo, cantidad, id } = curso;
+        const { imagen, titulo, cantidad, talla, id } = curso;
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>
                 <img src="${imagen}" width="100">
             </td>
             <td> ${titulo} </td>
-            <td> ${cantidad} </td>
+            <td>
+                <div class="txt-center cantidad">
+                    <a class="carrito-storage" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
+                    </a>
+                    <p>${cantidad}</p>
+                    <a class="carrito-storage" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 11V13H19V11H5Z"></path></svg>
+                    </a>
+                </div>
+            </td>
+            <td> ${talla} </td>
             <td>
                 <a href="#" class="borrar-curso" data-id="${id}">X</a>
             </td>
