@@ -215,28 +215,39 @@ function eliminarCurso(e) {
 
 // Lee el contenido del HTML al que le dimos click y extrae la informacion del curso
 function leerDatosCurso(curso, talla, cantidad) {
-    // Crear un objeto con el contenido del curso actual
-    const infoCurso = {
-        imagen: curso.querySelector('img').src,
-        titulo: curso.querySelector('h1').textContent,
-        id: curso.querySelector('input[type="submit"]').getAttribute('data-id'),
-        cantidad: cantidad,
-        talla: talla
+    // Obtener el ID del producto
+    const productoId = curso.querySelector('input[type="button"]').getAttribute('data-id');
+    
+    // Buscar el producto en el arreglo `camisas`
+    const producto = camisas.find(c => c.id == productoId);
+
+    // Si el producto no se encuentra, manejar el error
+    if (!producto) {
+        console.error('Producto no encontrado en el arreglo de camisas:', productoId);
+        return;
     }
 
+    // Crear un objeto con el contenido del curso actual
+    const infoCurso = {
+        imagen: producto.imagen,
+        titulo: producto.nombre,
+        id: producto.id,
+        cantidad: cantidad,
+        talla: talla
+    };
 
     // Revisa si un elemento ya existe en el carrito
-    const existe = articulosCarrito.some( curso => curso.id === infoCurso.id );
-    if(existe) {
-        // Actualizamos la cantidad
-        const cursos = articulosCarrito.map( curso => {
-            if( curso.id === infoCurso.id ) {
+    const existe = articulosCarrito.some(curso => curso.id === infoCurso.id);
+    if (existe) {
+        // Actualizamos la cantidad y talla
+        const cursos = articulosCarrito.map(curso => {
+            if (curso.id === infoCurso.id) {
                 curso.cantidad = cantidad;
                 curso.talla = talla;
                 return curso; // Retorna el objeto actualizado
             } else {
                 return curso; // Retorna los objetos que no son duplicados
-            }            
+            }
         });
         articulosCarrito = [...cursos];
     } else {

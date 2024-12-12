@@ -462,6 +462,10 @@ td {
     border-radius: 0.3rem;
 }
 
+.alerta.error {
+    grid-column: 1 / 6;
+}
+
 .correcto {
     background-color: rgb(74, 185, 0);
     text-align: center;
