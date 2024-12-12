@@ -216,6 +216,7 @@ td {
 
 .navegacion__enlace--activo {
     color: var(--secundarioOscuro);
+    font-weight: bold;
 }
 
 /** Grid **/

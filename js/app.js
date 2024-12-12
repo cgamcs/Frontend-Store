@@ -40,11 +40,6 @@ function cargarEvenetListeners() {
             mostrarProducto();
         }
 
-        // Cuando agregar un curso al carrito presionando "Agregar al carrito"
-        // if(!paginasBloqueada.includes(paginaActual)) {
-        //     listaCursos.addEventListener('click', agregarCurso);
-        // }
-
         articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
 
         carritoHTML();
@@ -109,19 +104,10 @@ function mostrarProducto() {
     const urlParams = new URLSearchParams(window.location.search);
     const productoId = urlParams.get("id");
 
-
-    console.log("URL Product ID:", Number(productoId));
-    console.log("URL Product ID Type:", typeof productoId);
-    console.log("Available Product IDs:", camisas.map(c => c.id));
-    console.log("Available Product ID Types:", camisas.map(c => typeof c.id));
-
     // Toma el producto de camisas
     const camisa = camisas.find(c => c.id === Number(productoId));
 
-    console.log("Found Camisa:", camisa);
-
     if (!camisa) {
-        console.error("No product found with ID:", productoId);
         document.getElementById('detalle-producto').innerHTML = `
             <h1>Producto no encontrado</h1>
             <p class="txt-center">Lo sentimos, el producto que está buscando no existe.</p>
@@ -152,7 +138,7 @@ function mostrarProducto() {
                     </select>
                     <input id="cantidad" class="formulario__campo" type="number" 
                            placeholder="Cantidad" min="1" max="10" required>
-                    <input id="boton" class="formulario__boton" type="button" 
+                    <input class="formulario__boton" type="submit" 
                            value="Agregar al carrito" data-id="${id}">
                 </form>
             </div>
@@ -216,7 +202,7 @@ function eliminarCurso(e) {
 // Lee el contenido del HTML al que le dimos click y extrae la informacion del curso
 function leerDatosCurso(curso, talla, cantidad) {
     // Obtener el ID del producto
-    const productoId = curso.querySelector('input[type="button"]').getAttribute('data-id');
+    const productoId = curso.querySelector('input[type="submit"]').getAttribute('data-id');
     
     // Buscar el producto en el arreglo `camisas`
     const producto = camisas.find(c => c.id == productoId);
