@@ -29,7 +29,14 @@ localStorage.getItem(carrito);
 function cargarEvenetListeners() {
     // Muestra los cursos desde Local Storage
     document.addEventListener('DOMContentLoaded', () => {
-        mostrarCamisas(camisas); // Muestra los autos a cargar
+        // Check which page we're on and call appropriate function
+        if (document.getElementById('resultado')) {
+            // This is the catalog/listing page
+            mostrarCamisas(camisas);
+        } else if (document.getElementById('detalle-producto')) {
+            // This is the product detail page
+            mostrarProducto();
+        }
 
         articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
 
@@ -65,43 +72,104 @@ function cargarEvenetListeners() {
 
 // Funciones
 function mostrarCamisas(camisas) {
-    limpiarFiltro() // Elimina el HTML previo
+    limpiarFiltro(); // Elimina el HTML previo
 
-    camisas.forEach( camisa => {
+    camisas.forEach(camisa => {
         const camisaHTML = document.createElement('DIV');
         camisaHTML.classList.add('producto');
 
-        const { imagen, nombre, precio, color, link } = camisa
+        const { id, imagen, nombre, precio, color } = camisa;
+        camisaHTML.setAttribute('id', id);
+
         camisaHTML.innerHTML = `
-            <a href="productos/${link}">
-                <img class="producto__img" loading="lazy" src="${imagen}" alt="Imagen Camisa">
+            <div class="producto__link" data-id="${id}">
+                <img class="producto__img" loading="lazy" src="${imagen}" alt="Imagen de camisa ${nombre}">
                 <div class="producto__informacion">
                     <p class="producto__nombre">${nombre}</p>
                     <p class="producto__precio">$${precio}</p>
                     <input type="hidden" name="${color}">
                 </div>
-            </a>
+            </div>
         `;
 
-        // Inserta em el HTML
-        resultado.appendChild(camisaHTML);
+        // Link para los detalles de la pagina
+        camisaHTML.querySelector('.producto__link').addEventListener('click', (e) => {
+            window.location.href = `basePage.html?id=${id}`;
+        });
+
+        // Inserta en el HTML
+        document.getElementById('resultado').appendChild(camisaHTML);
     });
+}
+
+function mostrarProducto() {
+    // Consigue el ID de la pagina
+    const urlParams = new URLSearchParams(window.location.search);
+    const productoId = urlParams.get("id");
+
+    // Toma el producto de camisas
+    const camisa = camisas.find(c => c.id === productoId);
+
+    console.log(productoId);
+
+    if (!camisa) {
+        document.getElementById('detalle-producto').innerHTML = `
+            <h1>Producto no encontrado</h1>
+            <p class="txt-center">Lo sentimos, el producto que está buscando no existe.</p>
+        `;
+        return;
+    }
+
+    const { imagen, nombre, precio, id } = camisa;
+
+    const productoDetalles = document.createElement('DIV');
+    productoDetalles.innerHTML = `
+        <h1>${nombre}</h1>
+
+        <div id="producto" class="camisa">
+            <img class="camisa__img" src="${imagen}" alt="Imagen de ${nombre}">
+
+            <div class="camisa__contenido">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos quia fugiat dolor accusamus suscipit tenetur excepturi similique delectus nulla odio hic reiciendis non quasi consequuntur, maiores velit, ducimus ab labore? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit voluptatibus perspiciatis soluta eos neque vel, similique enim odit itaque quia eius quisquam, ea corrupti reiciendis ipsa ipsum voluptate in doloribus! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur quam beatae, quo porro nam ea magnam quae assumenda ipsa officia cum rerum iste fuga sunt et voluptas, dignissimos itaque voluptates.</p>
+
+                <p class="producto__precio-activo">Precio: $${precio}</p>
+                
+                <form class="formulario">
+                    <select id="talla" class="formulario__campo" required>
+                        <option value="" disabled selected>--Selecciona Talla--</option>
+                        <option value="chica">Chica</option>
+                        <option value="mediana">Mediana</option>
+                        <option value="grande">Grande</option>
+                    </select>
+                    <input id="cantidad" class="formulario__campo" type="number" 
+                           placeholder="Cantidad" min="1" max="10" required>
+                    <input class="formulario__boton" type="submit" 
+                           value="Agregar al carrito" data-id="${id}">
+                </form>
+            </div>
+        </div>
+    `;
+
+    // Inserta en el HTML
+    const detalleProductoContainer = document.getElementById('detalle-producto');
+    detalleProductoContainer.innerHTML = ''; // Clear previous content
+    detalleProductoContainer.appendChild(productoDetalles);
 }
 
 function agregarCurso(e) {
     e.preventDefault();
 
     if (e.target.classList.contains('formulario__boton')) {
-        const cursoSeleccionado = e.target.parentElement.parentElement.parentElement.parentElement;
+        const cursoSeleccionado = e.target.closest('#producto');
 
         // Obtener los elementos de talla y cantidad
         const tallaSelecionada = cursoSeleccionado.querySelector('#talla');
-        const cantidadInput = cursoSeleccionado.querySelector('#cantidad').value;
+        const cantidadInput = cursoSeleccionado.querySelector('#cantidad');
 
         console.log(tallaSelecionada.value)
 
         // Validar que se haya seleccionado una talla
-        if (tallaSelecionada.value === '--Selecciona Talla-') {
+        if (!tallaSelecionada.value || tallaSelecionada.value === '--Selecciona Talla-') {
             mostararError('Debe seleccionar una talla');
             return;
         }
@@ -112,7 +180,7 @@ function agregarCurso(e) {
             return;
         }
 
-        leerDatosCurso(cursoSeleccionado, tallaSelecionada.value, cantidadInput);
+        leerDatosCurso(cursoSeleccionado, tallaSelecionada.value, cantidadInput.value);
 
         // Mostrar el carrito al agregar un proucto
         mostrarCarrito();

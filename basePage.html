@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="preload" href="/css/style.css" as="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/img/application.png">
+    <link rel="shortcut icon" href="img/application.png">
 </head>
 <body>
     <header class="header">
@@ -51,27 +51,8 @@
     </header><!-- .header -->
 
     <main class="contenedor">
-        <div class="producto-muestra">
-            <h1>Drupal</h1>
-
-            <div id="producto" class="camisa">
-                <img class="camisa__img" src="/img/11.jpg" alt="Imagen del producto">
-    
-                <div class="camisa__contenido">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos quia fugiat dolor accusamus suscipit tenetur excepturi similique delectus nulla odio hic reiciendis non quasi consequuntur, maiores velit, ducimus ab labore? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit voluptatibus perspiciatis soluta eos neque vel, similique enim odit itaque quia eius quisquam, ea corrupti reiciendis ipsa ipsum voluptate in doloribus! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur quam beatae, quo porro nam ea magnam quae assumenda ipsa officia cum rerum iste fuga sunt et voluptas, dignissimos itaque voluptates.</p>
-                    
-                    <form class="formulario">
-                        <select id="talla" class="formulario__campo">
-                            <option disabled selected>--Selecciona Talla-</option>
-                            <option >Chica</option>
-                            <option >Mediana</option>
-                            <option >Grande</option>
-                        </select>
-                        <input id="cantidad" class="formulario__campo" type="number" placeholder="Cantidad" min="1">
-                        <input class="formulario__boton" type="submit" value="Agregar al carrito" data-id="3">
-                    </form>
-                </div>
-            </div>
+        <div id="detalle-producto" class="producto-muestra">
+            
         </div>
     </main><!-- .contenedor -->
 
@@ -80,5 +61,6 @@
     </footer>
 
     <script src="/js/app.js"></script>
+    <script src="/js/db.js"></script>
 </body>
 </html>
