@@ -1,11 +1,27 @@
 // Variables
 const paginaActual = window.location.pathname;
-const paginasBloqueada = ['/index.html', '/nosotros.html']
+const paginasBloqueada = ['/index.html', '/nosotros.html'];
+const nombre = document.querySelector('#nombre');
+const minimo = document.querySelector('#minimo');
+const maximo = document.querySelector('#maximo');
+const color = document.querySelector('#color');
+
+// Contenedor para los resultados
+const resultado = document.querySelector('#resultado');
+
 const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const vaciarCarrito = document.querySelector('#vaciar-carrito');
 const listaCursos = document.querySelector('#producto');
 let articulosCarrito = [];
+
+// Generar un objeto con la búsqueda
+const datosBusqueda = {
+    nombre: '',
+    minimo: '',
+    maximo: '',
+    color: ''
+}
 
 // EventListeners
 cargarEvenetListeners();
@@ -13,10 +29,20 @@ localStorage.getItem(carrito);
 function cargarEvenetListeners() {
     // Muestra los cursos desde Local Storage
     document.addEventListener('DOMContentLoaded', () => {
+        mostrarCamisas(camisas); // Muestra los autos a cargar
+
         articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
 
         carritoHTML();
     })
+
+    // Event listeners para los select de búsqueda
+    if(paginasBloqueada.includes(paginaActual)) {
+        nombre.addEventListener('change', (e) => { datosBusqueda.nombre = e.target.value; filtrarCamisa(); })
+        minimo.addEventListener('change', (e) => { datosBusqueda.minimo = e.target.value; filtrarCamisa(); })
+        maximo.addEventListener('change', (e) => { datosBusqueda.maximo = e.target.value; filtrarCamisa(); })
+        color.addEventListener('change', (e) => { datosBusqueda.color = e.target.value; filtrarCamisa(); })
+    }
 
     // Cuando agregar un curso al carrito presionando "Agregar al carrito"
     if(!paginasBloqueada.includes(paginaActual)) {
@@ -38,6 +64,30 @@ function cargarEvenetListeners() {
 }
 
 // Funciones
+function mostrarCamisas(camisas) {
+    limpiarFiltro() // Elimina el HTML previo
+
+    camisas.forEach( camisa => {
+        const camisaHTML = document.createElement('DIV');
+        camisaHTML.classList.add('producto');
+
+        const { imagen, nombre, precio, color, link } = camisa
+        camisaHTML.innerHTML = `
+            <a href="productos/${link}">
+                <img class="producto__img" loading="lazy" src="${imagen}" alt="Imagen Camisa">
+                <div class="producto__informacion">
+                    <p class="producto__nombre">${nombre}</p>
+                    <p class="producto__precio">$${precio}</p>
+                    <input type="hidden" name="${color}">
+                </div>
+            </a>
+        `;
+
+        // Inserta em el HTML
+        resultado.appendChild(camisaHTML);
+    });
+}
+
 function agregarCurso(e) {
     e.preventDefault();
 
@@ -180,4 +230,70 @@ function limpiarHTML() {
     while(contenedorCarrito.firstChild) {
         contenedorCarrito.removeChild(contenedorCarrito.firstChild)
     }
+}
+
+// Limpiar HTML
+function limpiarFiltro() {
+    while(resultado.firstChild) {
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
+// Funcion para filtrar segun la búsqueda
+function filtrarCamisa() {
+    const resultado = camisas.filter( filtrarNombre ).filter( filtrarMinimo ).filter( filtrarMaximo ).filter( filtrarColor )
+
+    // console.log(resultado);
+
+    if( resultado.length ){
+        mostrarCamisas(resultado);
+    } else {
+        noResultado();
+    }
+
+}
+
+function noResultado() {
+    limpiarFiltro();
+
+    const noResultado = document.createElement('DIV');
+    noResultado.classList.add('alerta', 'error');
+    noResultado.textContent = 'No se encontraron resultados, intenta con otras características de búsqueda';
+    resultado.appendChild(noResultado);
+}
+
+function filtrarNombre(auto) {
+    const { nombre } = datosBusqueda;
+    if( nombre ){
+        return auto.nombre === nombre;
+    }
+
+    return auto;
+}
+
+function filtrarMinimo(auto) {
+    const { minimo } = datosBusqueda;
+    if( minimo ){
+        return auto.precio >= minimo;
+    }
+
+    return auto;
+}
+
+function filtrarMaximo(auto) {
+    const { maximo } = datosBusqueda;
+    if( maximo ){
+        return auto.precio <= maximo;
+    }
+
+    return auto;
+}
+
+function filtrarColor(auto) {
+    const { color } = datosBusqueda;
+    if( color ){
+        return auto.color === color;
+    }
+
+    return auto;
 }
