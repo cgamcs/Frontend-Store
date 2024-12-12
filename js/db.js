@@ -1,6 +1,6 @@
 const camisas = [
     {
-        id: '1',
+        id: 1,
         imagen: '/img/1.jpg',
         nombre: 'VueJS',
         precio: 30,
@@ -8,7 +8,7 @@ const camisas = [
         link: 'vue.html'
     },
     {
-        id: '2',
+        id: 2,
         imagen: '/img/2.jpg',
         nombre: 'AngularJS',
         precio: 38,
@@ -16,7 +16,7 @@ const camisas = [
         link: 'angular.html'
     },
     {
-        id: '3',
+        id: 3,
         imagen: '/img/3.jpg',
         nombre: 'React',
         precio: 25,
@@ -24,7 +24,7 @@ const camisas = [
         link: 'react.html'
     },
     {
-        id: '4',
+        id: 4,
         imagen: '/img/4.jpg',
         nombre: 'Redux',
         precio: 40,
@@ -32,7 +32,7 @@ const camisas = [
         link: 'redux.html'
     },
     {
-        id: '5',
+        id: 5,
         imagen: '/img/5.jpg',
         nombre: 'NodeJS',
         precio: 32,
@@ -40,7 +40,7 @@ const camisas = [
         link: 'node.html'
     },
     {
-        id: '6',
+        id: 6,
         imagen: '/img/6.jpg',
         nombre: 'Sass',
         precio: 25,
@@ -48,7 +48,7 @@ const camisas = [
         link: 'sass.html'
     },
     {
-        id: '7',
+        id: 7,
         imagen: '/img/7.jpg',
         nombre: 'HTML5',
         precio: 40,
@@ -56,7 +56,7 @@ const camisas = [
         link: 'html5.html'
     },
     {
-        id: '8',
+        id: 8,
         imagen: '/img/8.jpg',
         nombre: 'GitHub',
         precio: 30,
@@ -64,7 +64,7 @@ const camisas = [
         link: 'github.html'
     },
     {
-        id: '9',
+        id: 9,
         imagen: '/img/9.jpg',
         nombre: 'BulmaCSS',
         precio: 25,
@@ -72,7 +72,7 @@ const camisas = [
         link: 'bulma.html'
     },
     {
-        id: '10',
+        id: 10,
         imagen: '/img/10.jpg',
         nombre: 'TypeScript',
         precio: 38,
@@ -80,7 +80,7 @@ const camisas = [
         link: 'typescript.html'
     },
     {
-        id: '11',
+        id: 11,
         imagen: '/img/11.jpg',
         nombre: 'Drupal',
         precio: 32,
@@ -88,7 +88,7 @@ const camisas = [
         link: 'drupal.html'
     },
     {
-        id: '12',
+        id: 12,
         imagen: '/img/12.jpg',
         nombre: 'JavaScript',
         precio: 40,
@@ -96,7 +96,7 @@ const camisas = [
         link: 'javascript.html'
     },
     {
-        id: '13',
+        id: 13,
         imagen: '/img/13.jpg',
         nombre: 'GraphQL',
         precio: 30,
@@ -104,7 +104,7 @@ const camisas = [
         link: 'graph.html'
     },
     {
-        id: '14',
+        id: 14,
         imagen: '/img/14.jpg',
         nombre: 'WordPress',
         precio: 38,

@@ -27,8 +27,10 @@ const datosBusqueda = {
 cargarEvenetListeners();
 localStorage.getItem(carrito);
 function cargarEvenetListeners() {
+
     // Muestra los cursos desde Local Storage
     document.addEventListener('DOMContentLoaded', () => {
+
         // Check which page we're on and call appropriate function
         if (document.getElementById('resultado')) {
             // This is the catalog/listing page
@@ -37,6 +39,11 @@ function cargarEvenetListeners() {
             // This is the product detail page
             mostrarProducto();
         }
+
+        // Cuando agregar un curso al carrito presionando "Agregar al carrito"
+        // if(!paginasBloqueada.includes(paginaActual)) {
+        //     listaCursos.addEventListener('click', agregarCurso);
+        // }
 
         articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
 
@@ -49,11 +56,6 @@ function cargarEvenetListeners() {
         minimo.addEventListener('change', (e) => { datosBusqueda.minimo = e.target.value; filtrarCamisa(); })
         maximo.addEventListener('change', (e) => { datosBusqueda.maximo = e.target.value; filtrarCamisa(); })
         color.addEventListener('change', (e) => { datosBusqueda.color = e.target.value; filtrarCamisa(); })
-    }
-
-    // Cuando agregar un curso al carrito presionando "Agregar al carrito"
-    if(!paginasBloqueada.includes(paginaActual)) {
-        listaCursos.addEventListener('click', agregarCurso);
     }
 
     // Elimina cursos del carrito
@@ -94,7 +96,7 @@ function mostrarCamisas(camisas) {
 
         // Link para los detalles de la pagina
         camisaHTML.querySelector('.producto__link').addEventListener('click', (e) => {
-            window.location.href = `basePage.html?id=${id}`;
+            window.location.href = `producto.html?id=${id}`;
         });
 
         // Inserta en el HTML
@@ -107,12 +109,19 @@ function mostrarProducto() {
     const urlParams = new URLSearchParams(window.location.search);
     const productoId = urlParams.get("id");
 
-    // Toma el producto de camisas
-    const camisa = camisas.find(c => c.id === productoId);
 
-    console.log(productoId);
+    console.log("URL Product ID:", Number(productoId));
+    console.log("URL Product ID Type:", typeof productoId);
+    console.log("Available Product IDs:", camisas.map(c => c.id));
+    console.log("Available Product ID Types:", camisas.map(c => typeof c.id));
+
+    // Toma el producto de camisas
+    const camisa = camisas.find(c => c.id === Number(productoId));
+
+    console.log("Found Camisa:", camisa);
 
     if (!camisa) {
+        console.error("No product found with ID:", productoId);
         document.getElementById('detalle-producto').innerHTML = `
             <h1>Producto no encontrado</h1>
             <p class="txt-center">Lo sentimos, el producto que está buscando no existe.</p>
@@ -143,7 +152,7 @@ function mostrarProducto() {
                     </select>
                     <input id="cantidad" class="formulario__campo" type="number" 
                            placeholder="Cantidad" min="1" max="10" required>
-                    <input class="formulario__boton" type="submit" 
+                    <input id="boton" class="formulario__boton" type="button" 
                            value="Agregar al carrito" data-id="${id}">
                 </form>
             </div>
@@ -154,6 +163,9 @@ function mostrarProducto() {
     const detalleProductoContainer = document.getElementById('detalle-producto');
     detalleProductoContainer.innerHTML = ''; // Clear previous content
     detalleProductoContainer.appendChild(productoDetalles);
+
+    // Una vez que el producto se ha añadido al DOM, añade el event listener
+    document.querySelector('#producto').addEventListener('click', agregarCurso);
 }
 
 function agregarCurso(e) {

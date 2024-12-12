@@ -225,9 +225,15 @@ td {
     gap: 2rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1020px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -285,11 +291,14 @@ td {
 /** PRODUCTOS **/
 .producto {
     padding: 0.5rem;
+    cursor: pointer;
 }
 
 .producto__img {
     width: 100%;
-
+    border-radius: 1rem;
+    box-shadow:  20px 20px 60px #cbcbcb,
+             -20px -20px 60px #ffffff;
 }
 
 /* .producto__informacion {
@@ -305,6 +314,7 @@ td {
     font-size: 2rem;
     font-weight: bold;
     color: var(--secundario);
+    z-index: 1;
 }
 
 .producto__precio-activo {
@@ -365,6 +375,7 @@ td {
 }
 
 .nosotros__img {
+    border-radius: 1rem;
     grid-row: 1/ 2;
 }
 
@@ -404,7 +415,7 @@ td {
 }
 
 .camisa__img {
-    border-radius: 0.3rem;
+    border-radius: 1rem;
 }
 
 .formulario {
