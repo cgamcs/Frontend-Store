@@ -115,6 +115,7 @@ h1 { font-size: 2.4rem; }
     position: fixed;
     width: 100%;
     top: 0;
+    box-shadow: 0 -1px rgb(205 205 205 / 50%) inset;
 }
 
 .navegacion {
