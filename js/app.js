@@ -193,7 +193,7 @@ function eliminarCurso(e) {
         console.log(articulosCarrito.filter( curso => curso.id !== cursoId ));
 
         // Elimina del arreglo articulosCarrito por el data-id
-        articulosCarrito = articulosCarrito.filter( curso => curso.id !== cursoId );
+        articulosCarrito = articulosCarrito.filter( curso => curso.id !== Number(cursoId) );
 
         carritoHTML(); // Iterar sobre el carrito y mostrar su HTML
     }
@@ -271,7 +271,7 @@ function modificarCantidad(id, delta) {
     console.log(id, delta);
     const cantidad = articulosCarrito.map(curso => {
         if (curso.id === Number(id)) {
-            curso.cantidad = Math.max(0, curso.cantidad + delta); // Evita cantidades negativas
+            curso.cantidad = Math.max(0, curso.cantidad + Number(delta)); // Evita cantidades negativas
         }
         console.log(curso);
         return curso;
