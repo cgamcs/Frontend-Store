@@ -246,6 +246,42 @@ function leerDatosCurso(curso, talla, cantidad) {
     carritoHTML();
 }
 
+// Agrega el evento en el contenedor del carrito
+contenedorCarrito.addEventListener('click', manejarClick);
+
+// Maneja los eventos de click
+function manejarClick(e) {
+    console.log(e.target.closest('tr').querySelector('.borrar-curso').dataset.id);
+    if (e.target.closest('.carrito-storage')) { // Asegurarse de que se hizo click en el botón más o menos
+        const accion = e.target.closest('.carrito-storage').id; // 'mas' o 'menos'
+        const cursoId = e.target.closest('tr').querySelector('.borrar-curso').dataset.id; // ID del curso
+
+        if (accion === 'mas') {
+            console.log('hola desede +');
+            modificarCantidad(cursoId, 1);
+        } else if (accion === 'menos') {
+            console.log('hola desede -');
+            modificarCantidad(cursoId, -1);
+        }
+    }
+}
+
+// Modifica la cantidad en el carrito
+function modificarCantidad(id, delta) {
+    console.log(id, delta);
+    const cantidad = articulosCarrito.map(curso => {
+        if (curso.id === Number(id)) {
+            curso.cantidad = Math.max(0, curso.cantidad + delta); // Evita cantidades negativas
+        }
+        console.log(curso);
+        return curso;
+    });
+    articulosCarrito = [...cantidad];
+
+    // Vuelve a renderizar el carrito
+    carritoHTML();
+}
+
 // Muestra el carrito de compras en el HTML
 function carritoHTML() {
     // Limpiar el HTML
@@ -262,11 +298,11 @@ function carritoHTML() {
             <td> ${titulo} </td>
             <td>
                 <div class="txt-center cantidad">
-                    <a class="carrito-storage" type="button">
+                    <a id="mas" class="carrito-storage" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
                     </a>
-                    <p>${cantidad}</p>
-                    <a class="carrito-storage" type="button">
+                    <p> ${cantidad} </p>
+                    <a id="menos" class="carrito-storage" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 11V13H19V11H5Z"></path></svg>
                     </a>
                 </div>
