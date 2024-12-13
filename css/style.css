@@ -293,7 +293,7 @@ td {
 .contenido-cuerpo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
+    margin-top: 9.6rem;
 }
 
 @media (min-width: 768px) {
@@ -307,7 +307,7 @@ td {
 /** FILTROS **/
 .lado {
     width: 90%;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto;
     color: var(--negro);
 
     label {
