@@ -28,7 +28,7 @@ const datosBusqueda = {
 cargarEvenetListeners();
 localStorage.getItem(carrito);
 function cargarEvenetListeners() {
-
+    
     // Muestra los cursos desde Local Storage
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -53,6 +53,9 @@ function cargarEvenetListeners() {
         maximo.addEventListener('change', (e) => { datosBusqueda.maximo = e.target.value; filtrarCamisa(); })
         color.addEventListener('change', (e) => { datosBusqueda.color = e.target.value; filtrarCamisa(); })
     }
+
+    // Agrega el evento en el contenedor del carrito
+    contenedorCarrito.addEventListener('click', manejarClick);
 
     // Elimina cursos del carrito
     carrito.addEventListener('click', eliminarCurso);
@@ -186,73 +189,23 @@ function agregarCurso(e) {
 }
 
 // Elimina un curso del carrito
-function eliminarCurso(e) {
-    if(e.target.closest('.borrar-curso')) {
-        const cursoId = e.target.closest('.borrar-curso').dataset.id;
+function eliminarCurso(id) {
+    console.log(articulosCarrito.filter( curso => curso.id !== id ));
 
-        console.log(articulosCarrito.filter( curso => curso.id !== cursoId ));
+    // Elimina del arreglo articulosCarrito por el data-id
+    articulosCarrito = articulosCarrito.filter( curso => curso.id !== Number(id) );
 
-        // Elimina del arreglo articulosCarrito por el data-id
-        articulosCarrito = articulosCarrito.filter( curso => curso.id !== Number(cursoId) );
-
-        carritoHTML(); // Iterar sobre el carrito y mostrar su HTML
-    }
+    carritoHTML(); // Iterar sobre el carrito y mostrar su HTML
 }
-
-// Lee el contenido del HTML al que le dimos click y extrae la informacion del curso
-function leerDatosCurso(curso, talla, cantidad) {
-    // Obtener el ID del producto
-    const productoId = curso.querySelector('input[type="submit"]').getAttribute('data-id');
-    
-    // Buscar el producto en el arreglo `camisas`
-    const producto = camisas.find(c => c.id == productoId);
-
-    // Si el producto no se encuentra, manejar el error
-    if (!producto) {
-        console.error('Producto no encontrado en el arreglo de camisas:', productoId);
-        return;
-    }
-
-    // Crear un objeto con el contenido del curso actual
-    const infoCurso = {
-        imagen: producto.imagen,
-        titulo: producto.nombre,
-        id: producto.id,
-        cantidad: cantidad,
-        talla: talla
-    };
-
-    // Revisa si un elemento ya existe en el carrito
-    const existe = articulosCarrito.some(curso => curso.id === infoCurso.id);
-    if (existe) {
-        // Actualizamos la cantidad y talla
-        const cursos = articulosCarrito.map(curso => {
-            if (curso.id === infoCurso.id) {
-                curso.cantidad = cantidad;
-                curso.talla = talla;
-                return curso; // Retorna el objeto actualizado
-            } else {
-                return curso; // Retorna los objetos que no son duplicados
-            }
-        });
-        articulosCarrito = [...cursos];
-    } else {
-        // Agrega elementos al arreglo de carrito
-        articulosCarrito = [...articulosCarrito, infoCurso];
-    }
-
-    console.log(articulosCarrito);
-
-    carritoHTML();
-}
-
-// Agrega el evento en el contenedor del carrito
-contenedorCarrito.addEventListener('click', manejarClick);
 
 // Maneja los eventos de click
 function manejarClick(e) {
     console.log(e.target.closest('tr').querySelector('.borrar-curso').dataset.id);
-    if (e.target.closest('.carrito-storage')) { // Asegurarse de que se hizo click en el botón más o menos
+    if(e.target.closest('.borrar-curso')) {
+        const cursoId = e.target.closest('.borrar-curso').dataset.id;
+        eliminarCurso(cursoId);
+        
+    } else if (e.target.closest('.carrito-storage')) { // Asegurarse de que se hizo click en el botón más o menos
         const accion = e.target.closest('.carrito-storage').id; // 'mas' o 'menos'
         const cursoId = e.target.closest('tr').querySelector('.borrar-curso').dataset.id; // ID del curso
 
@@ -321,6 +274,53 @@ function carritoHTML() {
 
     // Agregar el carrito de compras al storage
     sincronizarStorage();
+}
+
+// Lee el contenido del HTML al que le dimos click y extrae la informacion del curso
+function leerDatosCurso(curso, talla, cantidad) {
+    // Obtener el ID del producto
+    const productoId = curso.querySelector('input[type="submit"]').getAttribute('data-id');
+    
+    // Buscar el producto en el arreglo `camisas`
+    const producto = camisas.find(c => c.id == productoId);
+
+    // Si el producto no se encuentra, manejar el error
+    if (!producto) {
+        console.error('Producto no encontrado en el arreglo de camisas:', productoId);
+        return;
+    }
+
+    // Crear un objeto con el contenido del curso actual
+    const infoCurso = {
+        imagen: producto.imagen,
+        titulo: producto.nombre,
+        id: producto.id,
+        cantidad: cantidad,
+        talla: talla
+    };
+
+    // Revisa si un elemento ya existe en el carrito
+    const existe = articulosCarrito.some(curso => curso.id === infoCurso.id);
+    if (existe) {
+        // Actualizamos la cantidad y talla
+        const cursos = articulosCarrito.map(curso => {
+            if (curso.id === infoCurso.id) {
+                curso.cantidad = cantidad;
+                curso.talla = talla;
+                return curso; // Retorna el objeto actualizado
+            } else {
+                return curso; // Retorna los objetos que no son duplicados
+            }
+        });
+        articulosCarrito = [...cursos];
+    } else {
+        // Agrega elementos al arreglo de carrito
+        articulosCarrito = [...articulosCarrito, infoCurso];
+    }
+
+    console.log(articulosCarrito);
+
+    carritoHTML();
 }
 
 function sincronizarStorage() {
