@@ -210,22 +210,23 @@ function manejarClick(e) {
     } else if (e.target.closest('.carrito-storage')) { // Asegurarse de que se hizo click en el botón más o menos
         const accion = e.target.closest('.carrito-storage').id; // 'mas' o 'menos'
         const cursoId = e.target.closest('tr').querySelector('.borrar-curso').dataset.id; // ID del curso
+        const talla = e.target.closest('tr').querySelector('.talla-producto').textContent.trim();
 
         if (accion === 'mas') {
             console.log('hola desede +');
-            modificarCantidad(cursoId, 1);
+            modificarCantidad(cursoId, talla, 1);
         } else if (accion === 'menos') {
             console.log('hola desede -');
-            modificarCantidad(cursoId, -1);
+            modificarCantidad(cursoId, talla, -1);
         }
     }
 }
 
 // Modifica la cantidad en el carrito
-function modificarCantidad(id, delta) {
+function modificarCantidad(id, talla, delta) {
     console.log(delta);
     const cantidad = articulosCarrito.map(curso => {
-        if (curso.id === Number(id)) {
+        if (curso.id === Number(id) && curso.talla === talla) {
             curso.cantidad = Math.max(1, Number(curso.cantidad) + delta); // Evita cantidades negativas
         }
         console.log(curso);
