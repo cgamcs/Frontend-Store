@@ -155,7 +155,7 @@ h1 { font-size: 2.4rem; }
     position: absolute;
     overflow: auto;
     scrollbar-width: thin;
-    right: 0;
+    right: -1.5rem;
     top: 100%;
     z-index: 1;
     background-color: var(--blanco);
@@ -173,7 +173,7 @@ h1 { font-size: 2.4rem; }
     position: absolute;
     overflow: auto;
     scrollbar-width: thin;
-    right: 0;
+    right: -1.5rem;
     top: 100%;
     z-index: 1;
     background-color: var(--blanco);
@@ -188,10 +188,12 @@ h1 { font-size: 2.4rem; }
 
 @media (min-width: 768px) {
     .submenu.hover #carrito {
+        right: 0;
         max-height: 320px;
     }
     
     .submenu:hover #carrito {
+        right: 0;
         max-height: 320px;
     }
 }
