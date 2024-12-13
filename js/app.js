@@ -224,7 +224,7 @@ function modificarCantidad(id, delta) {
     console.log(delta);
     const cantidad = articulosCarrito.map(curso => {
         if (curso.id === Number(id)) {
-            curso.cantidad = Math.max(0, Number(curso.cantidad) + delta); // Evita cantidades negativas
+            curso.cantidad = Math.max(1, Number(curso.cantidad) + delta); // Evita cantidades negativas
         }
         console.log(curso);
         return curso;
