@@ -160,6 +160,8 @@ h1 { font-size: 2.4rem; }
     max-height: 320px;
     min-width: 300px;
     border-radius: 1rem;
+    box-shadow: 5px -5px 20px rgba(0,0,0,0),
+               -5px 5px 20px 0px rgba(0, 0, 0, .3);
     scrollbar-color:var(--scrollbar) transparent;
 }
 
@@ -176,6 +178,8 @@ h1 { font-size: 2.4rem; }
     max-height: 320px;
     min-width: 300px;
     border-radius: 1rem;
+    box-shadow: 5px -5px 20px rgba(0,0,0,0),
+               -5px 5px 20px 0px rgba(0, 0, 0, .3);
     scrollbar-color:var(--scrollbar) transparent;
 }
 
@@ -215,8 +219,17 @@ table {
 th,
 td {
     font-size: 1.5rem;
-    padding: 1.2rem 1.5rem;
+    padding: .8rem 1rem;
     border-bottom: 1px solid var(--negro);
+}
+
+@media (min-width: 768px) {
+    th,
+    td {
+        font-size: 1.5rem;
+        padding: 1.2rem 1.5rem;
+        border-bottom: 1px solid var(--negro);
+    }
 }
 
 #img-carrito {

@@ -8,6 +8,7 @@ const color = document.querySelector('#color');
 
 // Contenedor para los resultados
 const resultado = document.querySelector('#resultado');
+const detalleProductoContainer = document.getElementById('detalle-producto');
 
 const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
@@ -146,8 +147,7 @@ function mostrarProducto() {
     `;
 
     // Inserta en el HTML
-    const detalleProductoContainer = document.getElementById('detalle-producto');
-    detalleProductoContainer.innerHTML = ''; // Clear previous content
+    limpiarHTML();
     detalleProductoContainer.appendChild(productoDetalles);
 
     // Una vez que el producto se ha añadido al DOM, añade el event listener
