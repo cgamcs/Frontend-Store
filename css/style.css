@@ -54,15 +54,8 @@ ul { list-style: none; margin: 0; }
 }
 
 .contenedor-producto {
-    margin: 5rem auto 0;
+    margin: 9rem auto 0;
     width: min(90%, 120rem);
-}
-
-@media (min-width: 768px) {
-    .contenedor-producto {
-        margin: 9rem auto 0;
-        width: min(90%, 120rem);
-    }
 }
 
 .contenedor-main {
