@@ -1,8 +1,8 @@
 :root {
     --primario: #EFEFEF;
     --primarioOscuro: #822fca;
-    --secundario: #b9b9b9;
-    --secundarioOscuro: #5e5e5e;
+    --secundario: #4e4e4e;
+    --secundarioOscuro: #2e2e2e;
     --blanco: #fff;
     --negro: #000;
 
@@ -278,7 +278,7 @@ td {
     gap: 2rem;
 }
 
-@media (min-width: 1020px) {
+@media (min-width: 1024px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -355,10 +355,6 @@ td {
     box-shadow:  20px 20px 60px #cbcbcb,
              -20px -20px 60px #ffffff;
 }
-
-/* .producto__informacion {
-    padding: 1rem;
-} */
 
 .producto__nombre {
     font-size: 2rem;

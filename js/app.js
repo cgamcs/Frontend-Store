@@ -5,9 +5,11 @@ const nombre = document.querySelector('#nombre');
 const minimo = document.querySelector('#minimo');
 const maximo = document.querySelector('#maximo');
 const color = document.querySelector('#color');
+const nosotros = document.querySelector('#nosotros');
 
 // Contenedor para los resultados
 const resultado = document.querySelector('#resultado');
+const resultadoNostros = document.querySelector('#resultadoNostros');
 const detalleProductoContainer = document.getElementById('detalle-producto');
 
 const carrito = document.querySelector('#carrito');
@@ -46,6 +48,8 @@ function cargarEvenetListeners() {
         carritoHTML();
     })
 
+    nosotros.addEventListener('click', mostrarNosotros);
+
     // Event listeners para los select de búsqueda
     if(paginasBloqueada.includes(paginaActual)) {
         nombre.addEventListener('change', (e) => { datosBusqueda.nombre = e.target.value; filtrarCamisa(); })
@@ -64,7 +68,7 @@ function cargarEvenetListeners() {
     vaciarCarrito.addEventListener('click', () => {
         articulosCarrito = []; // Reseteamos el arreglo
 
-        limpiarHTML(); // Eliminamos todo el HTML
+        limpiarCarrito(); // Eliminamos todo el HTML
 
         // Actualizar el carrito de compras al storage
         sincronizarStorage();
@@ -84,7 +88,9 @@ function mostrarCamisas(camisas) {
 
         camisaHTML.innerHTML = `
             <div class="producto__link" data-id="${id}">
-                <img class="producto__img" loading="lazy" src="${imagen}" alt="Imagen de camisa ${nombre}">
+                <picture>
+                    <img class="producto__img" src="${imagen}" loading="lazy" alt="Imagen de camisa ${nombre}">
+                </picture>
                 <div class="producto__informacion">
                     <p class="producto__nombre">${nombre}</p>
                     <p class="producto__precio">$${precio}</p>
@@ -101,6 +107,81 @@ function mostrarCamisas(camisas) {
         // Inserta en el HTML
         document.getElementById('resultado').appendChild(camisaHTML);
     });
+}
+
+function mostrarNosotros() {
+    limpiarHTML();
+
+    const navegacion = document.querySelector('.navegacion__enlace');
+    console.log(navegacion.id);
+    console.log(navegacion.id !== 'nostros');
+    console.log(navegacion.id === 'nostros');
+    if(navegacion.id !== 'nostros') {
+        navegacion.classList.remove('navegacion__enlace--activo');
+        nosotros.classList.add('navegacion__enlace--activo');
+    }
+
+    const nosotrosHTML = document.createElement('MAIN');
+    nosotrosHTML.classList.add('contenedor-producto');
+
+    const tienda = document.getElementById('seccionTienda');
+    tienda.remove();
+
+    nosotrosHTML.innerHTML = `
+        <h1>Nosotros</h1>
+
+        <div class="nosotros">
+            <p class="nosotros__contenido">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam turpis quam, pharetra eget facilisis tristique, vestibulum ultricies leo. Donec fringilla finibus erat non vehicula. Fusce sit amet eros ac neque tristique bibendum. Integer luctus eget felis eu auctor. Duis finibus tempus tincidunt. Pellentesque consectetur ipsum ac semper sagittis. Sed dictum eros at lectus tempus, ac tempus ipsum egestas. Vivamus vel dolor a dui imperdiet fermentum nec vitae tellus. Aliquam sodales maximus tellus, sit amet fermentum diam congue sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur sagittis tempor quam. Curabitur porttitor posuere ex id faucibus. Quisque iaculis est non diam lacinia, sit amet maximus enim malesuada. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec eget dapibus ligula.
+            </p>
+
+            <img class="nosotros__img" src="img/nosotros.jpg" alt="Imagen de nosotros">
+        </div>
+    `;
+
+    const seccionNostros = document.createElement('DIV');
+    seccionNostros.classList.add('contenedor', 'comprar');
+    seccionNostros.innerHTML = `
+        <h2 class="comprar__titulo">¿Porqué comprar con nosotros?</h2>
+
+        <div class="bloques">
+            <div class="bloque">
+                <img class="bloque__img" src="img/image1.png" alt="Porque comprar">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+
+            <div class="bloque">
+                <img class="bloque__img" src="img/image2.png" alt="Para Devs">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+
+            <div class="bloque">
+                <img class="bloque__img" src="img/image3.png" alt="Envío Gratis">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+
+            <div class="bloque">
+                <img class="bloque__img" src="img/image4.png" alt="La Mejor Calidad">
+                <h3 class="bloque__titulo">El Mejor Precio</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac purus ut turpis convallis vulputate et vel est. Nam quis vehicula eros.
+                </p>
+            </div><!-- .bloque -->
+        </div>
+    `;
+
+    // Inserta en el HTML
+    document.getElementById('resultadoNostros').appendChild(nosotrosHTML);
+    document.getElementById('resultadoNostros').appendChild(seccionNostros);
 }
 
 function mostrarProducto() {
@@ -150,7 +231,7 @@ function mostrarProducto() {
     `;
 
     // Inserta en el HTML
-    limpiarHTML();
+    limpiarCarrito();
     detalleProductoContainer.appendChild(productoDetalles);
 
     // Una vez que el producto se ha añadido al DOM, añade el event listener
@@ -241,7 +322,7 @@ function modificarCantidad(id, talla, delta) {
 // Muestra el carrito de compras en el HTML
 function carritoHTML() {
     // Limpiar el HTML
-    limpiarHTML();
+    limpiarCarrito();
 
     // Recorre el carrito y genera el HTML
     articulosCarrito.forEach( curso => {
@@ -353,17 +434,22 @@ function mostararError(error) {
 }
 
 // Elimina los cursos del tbody
-function limpiarHTML() {
+function limpiarCarrito() {
     while(contenedorCarrito.firstChild) {
         contenedorCarrito.removeChild(contenedorCarrito.firstChild)
     }
 }
 
-// Limpiar HTML
+// Limpiar HTML de tienda
 function limpiarFiltro() {
     while(resultado.firstChild) {
         resultado.removeChild(resultado.firstChild);
     }
+}
+
+// Limpiar HTML
+function limpiarHTML() {
+    document.querySelector('#seccionTienda').innerHTML = '';
 }
 
 // Funcion para filtrar segun la búsqueda
