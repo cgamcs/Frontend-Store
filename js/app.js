@@ -5,11 +5,13 @@ const nombre = document.querySelector('#nombre');
 const minimo = document.querySelector('#minimo');
 const maximo = document.querySelector('#maximo');
 const color = document.querySelector('#color');
+const tienda = document.querySelector('#tienda');
 const nosotros = document.querySelector('#nosotros');
 
 // Contenedor para los resultados
 const resultado = document.querySelector('#resultado');
 const resultadoNostros = document.querySelector('#resultadoNostros');
+const seccionTienda = document.querySelector('#seccionTienda')
 const detalleProductoContainer = document.getElementById('detalle-producto');
 
 const carrito = document.querySelector('#carrito');
@@ -34,12 +36,12 @@ function cargarEvenetListeners() {
     // Muestra los cursos desde Local Storage
     document.addEventListener('DOMContentLoaded', () => {
 
-        // Check which page we're on and call appropriate function
+        // Revisa en que pagina estamos y llama la funcion correcta
         if (document.getElementById('resultado')) {
-            // This is the catalog/listing page
+            // Catalogo
             mostrarCamisas(camisas);
         } else if (document.getElementById('detalle-producto')) {
-            // This is the product detail page
+            // Un solo producto
             mostrarProducto();
         }
 
@@ -47,6 +49,8 @@ function cargarEvenetListeners() {
 
         carritoHTML();
     })
+
+    tienda.addEventListener('click', seguirClic);
 
     nosotros.addEventListener('click', mostrarNosotros);
 
@@ -76,9 +80,23 @@ function cargarEvenetListeners() {
 }
 
 // Funciones
+function seguirClic(e) {
+    console.log(e.target.id);
+    if(e.target.id === 'tienda') {
+        tienda.classList.add('navegacion__enlace--activo');
+        nosotros.classList.remove('navegacion__enlace--activo');
+        
+        limpiarNosotros();
+
+        seccionTienda.classList.remove('nowhere');
+        return;
+    }
+}
+
 function mostrarCamisas(camisas) {
     limpiarFiltro(); // Elimina el HTML previo
 
+    console.log(camisas);
     camisas.forEach(camisa => {
         const camisaHTML = document.createElement('DIV');
         camisaHTML.classList.add('producto');
@@ -109,23 +127,21 @@ function mostrarCamisas(camisas) {
     });
 }
 
-function mostrarNosotros() {
+function mostrarNosotros(e) {
     limpiarHTML();
 
-    const navegacion = document.querySelector('.navegacion__enlace');
-    console.log(navegacion.id);
-    console.log(navegacion.id !== 'nostros');
-    console.log(navegacion.id === 'nostros');
-    if(navegacion.id !== 'nostros') {
-        navegacion.classList.remove('navegacion__enlace--activo');
+    console.log(e.target.id);
+    if(e.target.id === 'nosotros') {
         nosotros.classList.add('navegacion__enlace--activo');
+        tienda.classList.remove('navegacion__enlace--activo');
+        
     }
 
     const nosotrosHTML = document.createElement('MAIN');
     nosotrosHTML.classList.add('contenedor-producto');
 
-    const tienda = document.getElementById('seccionTienda');
-    tienda.remove();
+    // const seccionTienda = document.getElementById('seccionTienda');
+    // seccionTienda.remove();
 
     nosotrosHTML.innerHTML = `
         <h1>Nosotros</h1>
@@ -449,7 +465,14 @@ function limpiarFiltro() {
 
 // Limpiar HTML
 function limpiarHTML() {
-    document.querySelector('#seccionTienda').innerHTML = '';
+    seccionTienda.classList.add('nowhere');
+}
+
+// Limpiar HTML
+function limpiarNosotros() {
+    while(resultadoNostros.firstChild) {
+        resultadoNostros.removeChild(resultadoNostros.firstChild);
+    }
 }
 
 // Funcion para filtrar segun la búsqueda

@@ -79,6 +79,10 @@ h1 { font-size: 2.4rem; }
     display: flex;
 }
 
+.nowhere {
+    display: none !important;
+}
+
 .button {
   display: inline-block;
   height: 38px;
