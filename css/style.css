@@ -109,6 +109,13 @@ h1 { font-size: 2.4rem; }
   outline: 0;
 }
 
+.u-full-width {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.uppercase { text-transform: uppercase; }
+
 .txt-center { text-align: center; }
 
 /** HEADER **/
@@ -165,7 +172,7 @@ h1 { font-size: 2.4rem; }
     z-index: 1;
     background-color: var(--blanco);
     padding: 20px;
-    max-height: 288px;
+    max-height: 328px;
     min-width: 300px;
     border-radius: 1rem;
     box-shadow: 5px -5px 20px rgba(0,0,0,0),
@@ -183,7 +190,7 @@ h1 { font-size: 2.4rem; }
     z-index: 1;
     background-color: var(--blanco);
     padding: 20px;
-    max-height: 288px;
+    max-height: 328px;
     min-width: 300px;
     border-radius: 1rem;
     box-shadow: 5px -5px 20px rgba(0,0,0,0),
@@ -194,18 +201,21 @@ h1 { font-size: 2.4rem; }
 @media (min-width: 768px) {
     .submenu.hover #carrito {
         right: 0;
-        max-height: 320px;
+        max-height: 352px;
     }
     
     .submenu:hover #carrito {
         right: 0;
-        max-height: 320px;
+        max-height: 352px;
     }
 }
 
-.u-full-width {
-    width: 100%;
-    box-sizing: border-box;
+.checkout { transition: .5s ease-in-out; }
+
+.checkout:hover {
+    transition: .5s ease-in-out;
+    background-color: var(--negro);
+    color: var(--blanco);
 }
 
 .cantidad {
